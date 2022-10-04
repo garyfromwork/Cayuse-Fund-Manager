@@ -242,4 +242,5 @@ where fund_name is not null
 and frbgrnt_code is not null
 and frbgrnt_code not like '27%'
 and frbgrnt_code not like '%R%'
+and fund_code not in ('20707','20728')
 order by Fund_Code asc, Cost_Center_Code asc;
