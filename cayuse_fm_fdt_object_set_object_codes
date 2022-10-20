@@ -234,7 +234,7 @@ all_funds as (
             frvfund_nchg_date > sysdate
             or frvfund_nchg_date is null
         )
-)
+), object_set as (
 select distinct 'SFASU' Object_Set_Code,
     'Stephen F. Austin State University' Object_Set_Name,
     ftvacct_acct_code Object_Code_Code,
@@ -285,4 +285,77 @@ and (case
             ftvacct_nchg_date > sysdate
             or ftvacct_nchg_date is null
         ) then ftvacct_status_ind
-else 'T' end) = 'A';
+else 'T' end) = 'A'
+union
+select distinct 'SFASU' Object_Set_Code,
+    'Stephen F. Austin State University' Object_Set_Name,
+    '61' Object_Code_Code,
+    'Salaries and Wages' Object_Code_Name,
+    'A' Display_Status_Code,
+    '61' Group1_Object_Code,
+    '61' Group2_Object_Code,
+    '61' Group3_Object_Code,
+    '61' Group4_Object_Code,
+    '' Central,
+    'S' Object_Code_Type,
+    'E' Object_Code_Group
+from dual
+union
+select distinct 'SFASU' Object_Set_Code,
+    'Stephen F. Austin State University' Object_Set_Name,
+    '64' Object_Code_Code,
+    'Employee Benefits' Object_Code_Name,
+    'A' Display_Status_Code,
+    '64' Group1_Object_Code,
+    '64' Group2_Object_Code,
+    '64' Group3_Object_Code,
+    '64' Group4_Object_Code,
+    '' Central,
+    'F' Object_Code_Type,
+    'E' Object_Code_Group
+from dual
+union
+select distinct 'SFASU' Object_Set_Code,
+    'Stephen F. Austin State University' Object_Set_Name,
+    '71' Object_Code_Code,
+    'Travel' Object_Code_Name,
+    'A' Display_Status_Code,
+    '71' Group1_Object_Code,
+    '71' Group2_Object_Code,
+    '71' Group3_Object_Code,
+    '71' Group4_Object_Code,
+    '' Central,
+    'N' Object_Code_Type,
+    'E' Object_Code_Group
+from dual
+union
+select distinct 'SFASU' Object_Set_Code,
+    'Stephen F. Austin State University' Object_Set_Name,
+    '72' Object_Code_Code,
+    'Operations ' || chr(38) ||  ' Maintenance' Object_Code_Name,
+    'A' Display_Status_Code,
+    '72' Group1_Object_Code,
+    '72' Group2_Object_Code,
+    '72' Group3_Object_Code,
+    '72' Group4_Object_Code,
+    '' Central,
+    'N' Object_Code_Type,
+    'E' Object_Code_Group
+from dual
+union
+select distinct 'SFASU' Object_Set_Code,
+    'Stephen F. Austin State University' Object_Set_Name,
+    '77' Object_Code_Code,
+    'Indirect Costs' Object_Code_Name,
+    'A' Display_Status_Code,
+    '77' Group1_Object_Code,
+    '77' Group2_Object_Code,
+    '77' Group3_Object_Code,
+    '77' Group4_Object_Code,
+    '' Central,
+    'I' Object_Code_Type,
+    'E' Object_Code_Group
+from dual)
+select *
+from object_set
+order by length(object_code_code) asc, object_code_code asc;
