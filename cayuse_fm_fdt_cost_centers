@@ -235,7 +235,7 @@ all_funds as (
 )
 select distinct 
     frbgrnt_code Cost_Center_Code,
-    frbgrnt_title Cost_Center_Name,
+    ltrim(frbgrnt_title) Cost_Center_Name,
     status Display_Status_Code,
     to_char(frbgrnt_project_start_date, 'mm-dd-yyyy') Start_Date,
     to_char(frbgrnt_project_end_date, 'mm-dd-yyyy') End_Date
@@ -245,4 +245,5 @@ and frbgrnt_code is not null
 and frbgrnt_code not like '27%'
 and frbgrnt_code not like '%R%'
 and fund_code not in ('20707','20728')
+and status != 'T'
 order by Cost_Center_Code asc;
